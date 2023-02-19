@@ -62,11 +62,11 @@ export default {
 		return {
 			orders: [],
 			ordersName: [],
-			name: "xx",
-			address: "asd",
+			name: "",
+			address: "",
 			city: "",
 			phone: "",
-			email: "nabil@gmail.com",
+			email: "",
 			notes: "",
 		};
 	},
