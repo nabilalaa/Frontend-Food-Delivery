@@ -100,7 +100,6 @@ export default {
 			}
 		},
 		choose(e) {
-			console.log(e.target.value);
 			if (e.target.value == "#All") {
 				document.querySelectorAll(".card").forEach((ele) => {
 					ele.style.display = "block";
@@ -133,7 +132,6 @@ export default {
 			}
 		},
 		add_order(value) {
-			console.log(this.orders);
 			this.orders.push(value);
 
 			sessionStorage.setItem("data", JSON.stringify(this.orders));
@@ -163,8 +161,6 @@ export default {
 		} catch (error) {
 			return;
 		}
-
-		// this.orders.pop(0);
 	},
 };
 </script>
