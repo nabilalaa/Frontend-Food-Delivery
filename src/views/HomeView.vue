@@ -135,6 +135,7 @@ export default {
 			this.orders.push(value);
 
 			sessionStorage.setItem("data", JSON.stringify(this.orders));
+            
 		},
 		details(value) {
 			this.showmodel = !this.showmodel;

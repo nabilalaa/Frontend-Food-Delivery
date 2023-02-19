@@ -39,23 +39,9 @@
 						</td>
 
 						<td>{{ i.price }}ج.م</td>
-						<td>
-							<input
-								class="quantity"
-								type="number"
-								name=""
-								id=""
-								min="1"
-								v-model="i.quantity"
-								@change="ordertotal"
-							/>
-						</td>
+						<td>{{ i.quantity }}</td>
 						<td class="subtotal">
-							<input
-								type="number"
-								name=""
-								:value="i.quantity * i.price"
-							/>
+							{{ i.quantity * i.price }}
 						</td>
 						<div
 							class="remove"
@@ -71,10 +57,7 @@
 					<div class="flex">
 						<h4>المجموع</h4>
 						<div>
-							<input
-								type="number"
-								v-model="total"
-							/>
+							{{ total }}
 						</div>
 					</div>
 					<div class="flex">
@@ -117,20 +100,6 @@ export default {
 		};
 	},
 	methods: {
-		ordertotal() {
-			let list = [];
-
-			Array.from(
-				document.querySelectorAll(".subtotal input")
-			).forEach((e) => {
-				list.push(Number(e.value));
-			});
-			var sum = list.reduce(function (a, b) {
-				return a + b;
-			}, 0);
-
-			this.total = sum;
-		},
 		deleteItem(e) {
 			this.cart_items.splice(e, 1);
 

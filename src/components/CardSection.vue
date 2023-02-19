@@ -21,7 +21,7 @@
 		</div>
 		<div class="flex" style="margin: 0; justify-content: center">
 			<FormButton
-				:text="buttonText"
+				v-html="buttonText"
 				BackgroundColor="#CCDA46"
 				TextColor="#FFF"
 				to=""
@@ -87,6 +87,10 @@ export default {
 			this.orders.push(order);
 
 			this.$emit("order", order);
+			this.buttonText = '<span class="icon-shopping-cart"></span>';
+			console.log(document.querySelector(".flex a"));
+			document.querySelector(".flex a").style.pointerEvents =
+				"none";
 		},
 		details() {
 			let order = {
@@ -163,6 +167,7 @@ input[type="number"] {
 	align-items: center;
 	justify-content: center;
 	font-size: 30px;
+	cursor: pointer;
 }
 
 .show {
@@ -184,5 +189,6 @@ input[type="number"] {
 	align-items: center;
 	justify-content: center;
 	font-size: 30px;
+	cursor: pointer;
 }
 </style>

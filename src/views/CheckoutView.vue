@@ -8,6 +8,7 @@
 				<FormInput label="الاسم بالكامل *" v-model="name" />
 				<FormInput label="العنوان *" v-model="address" />
 				<FormInput label="المحافظة *" v-model="city" />
+				{{ this.phone }}
 				<FormInput label="رقم الموبيل *" v-model="phone" />
 				<FormInput label="الايميل *" v-model="email" />
 				<FormTextarea label="الملاحظات" v-model="notes" />
@@ -66,7 +67,7 @@ export default {
 			address: "asdasd",
 			city: "asd",
 			phone: "sd",
-			email: "adasd",
+			email: "nabilalaa06@gmail.com",
 			notes: "",
 		};
 	},
@@ -74,34 +75,38 @@ export default {
 	methods: {
 		async sendOrder() {
 			if (this.name && this.address && this.phone && this.email) {
-				await axios
-					.post(
-						"https://api-food-delivery-production.up.railway.app/order",
-						{
-							name: this.name,
-							address:
-								this.address +
-								" - " +
-								this.city,
-							phone: this.phone,
-							email: this.email,
-							notes: this.notes,
-							order: String(
-								this.ordersName
-							).replaceAll(",", "  -  "),
-						}
-					)
-					.then((response) => {
-						if (response.status > 200) {
-							alert("تم التسليم بنجاح");
-							this.$router.push("/");
-						}
-					})
-					.catch((error) => {
-						if (error.response.data.email) {
-							alert("ادخل ايميل صالح");
-						}
-					});
+				try {
+					await axios
+						.post(
+							"https://api-food-delivery-production.up.railway.app/order",
+							{
+								name: this.name,
+								address:
+									this.address +
+									" - " +
+									this.city,
+								number: this.phone,
+								email: this.email,
+								notes: this.notes,
+								order: String(
+									this.ordersName
+								).replaceAll(",", "  -  "),
+							}
+						)
+						.then((response) => {
+							if (response.status > 200) {
+								alert("تم التسليم بنجاح");
+								this.$router.push("/");
+							}
+						})
+						.catch((error) => {
+							if (error.response.data.email) {
+								alert("ادخل ايميل صالح");
+							}
+						});
+				} catch (error) {
+					console.log(error);
+				}
 			} else {
 				alert("املأ الحقول");
 			}
