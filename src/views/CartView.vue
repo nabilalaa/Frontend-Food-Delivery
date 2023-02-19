@@ -118,7 +118,6 @@ export default {
 	},
 	methods: {
 		ordertotal() {
-			console.log(document.querySelectorAll(".subtotal input"));
 			let list = [];
 
 			Array.from(

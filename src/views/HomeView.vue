@@ -91,15 +91,12 @@ export default {
 	},
 	methods: {
 		closeModel(e) {
-			console.log(e.target);
 			if (
 				e.target == document.querySelector(".model-page") ||
 				e.target == document.querySelector(".close span")
 			) {
 				this.showmodel = false;
 				document.body.style.overflow = "auto";
-			} else {
-				console.log("sss");
 			}
 		},
 		choose(e) {
