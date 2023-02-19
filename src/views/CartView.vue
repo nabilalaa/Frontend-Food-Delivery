@@ -13,7 +13,6 @@
 	</div>
 	<div class="cart-section">
 		<div class="cart">
-			{{ this.cart_items }}
 			<table v-if="this.cart_items.length !== 0">
 				<thead>
 					<tr>
