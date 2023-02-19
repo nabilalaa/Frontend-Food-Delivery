@@ -19,7 +19,7 @@
 				<div class="minus" @click="minus">-</div>
 			</div>
 		</div>
-		<div class="flex" style="margin: 0; justify-content: space-evenly">
+		<div class="flex" style="margin: 0; justify-content: center">
 			<FormButton
 				:text="buttonText"
 				BackgroundColor="#CCDA46"
