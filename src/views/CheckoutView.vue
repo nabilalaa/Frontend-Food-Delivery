@@ -62,11 +62,11 @@ export default {
 		return {
 			orders: [],
 			ordersName: [],
-			name: "",
-			address: "",
-			city: "",
-			phone: "",
-			email: "",
+			name: "adasd",
+			address: "asdasd",
+			city: "asd",
+			phone: "sd",
+			email: "adasd",
 			notes: "",
 		};
 	},
@@ -94,12 +94,12 @@ export default {
 					.then((response) => {
 						if (response.status > 200) {
 							alert("تم التسليم بنجاح");
-							console.log(response.status);
-							this.name = "";
-							this.address = "";
-							this.phone = "";
-							this.email = "";
-							this.notes = "";
+							this.$router.push("/");
+						}
+					})
+					.catch((error) => {
+						if (error.response.data.email) {
+							alert("ادخل ايميل صالح");
 						}
 					});
 			} else {
