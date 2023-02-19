@@ -5,11 +5,11 @@
 		</router-link>
 		<div class="checkout">
 			<form>
-				<FormInput label="الاسم بالكامل" v-model="name" />
-				<FormInput label="العنوان" v-model="address" />
-				<FormInput label="المحافظة" v-model="city" />
-				<FormInput label="رقم الموبيل" v-model="phone" />
-				<FormInput label="الايميل" v-model="email" />
+				<FormInput label="الاسم بالكامل *" v-model="name" />
+				<FormInput label="العنوان *" v-model="address" />
+				<FormInput label="المحافظة *" v-model="city" />
+				<FormInput label="رقم الموبيل *" v-model="phone" />
+				<FormInput label="الايميل *" v-model="email" />
 				<FormTextarea label="الملاحظات" v-model="notes" />
 				<h2>طلبك</h2>
 				<table>
@@ -73,15 +73,38 @@ export default {
 
 	methods: {
 		async sendOrder() {
-			console.log(this.firstName);
-			await axios.post("http://127.0.0.1:8000/order", {
-				name: this.name,
-				address: this.address + " - " + this.city,
-				phone: this.phone,
-				email: this.email,
-				notes: this.notes,
-				order: String(this.ordersName).replaceAll(",", "  -  "),
-			});
+			if (this.name && this.address && this.phone && this.email) {
+				await axios
+					.post(
+						"https://api-food-delivery-production.up.railway.app/order",
+						{
+							name: this.name,
+							address:
+								this.address +
+								" - " +
+								this.city,
+							phone: this.phone,
+							email: this.email,
+							notes: this.notes,
+							order: String(
+								this.ordersName
+							).replaceAll(",", "  -  "),
+						}
+					)
+					.then((response) => {
+						if (response.status > 200) {
+							alert("تم التسليم بنجاح");
+							console.log(response.status);
+							this.name = "";
+							this.address = "";
+							this.phone = "";
+							this.email = "";
+							this.notes = "";
+						}
+					});
+			} else {
+				alert("املأ الحقول");
+			}
 		},
 	},
 	components: {
@@ -93,9 +116,7 @@ export default {
 		let data = JSON.parse(sessionStorage.getItem("data"));
 		this.orders = data;
 		data.forEach((e) => {
-			console.log(e.name);
 			this.ordersName.push(e.name);
-			console.log(String(this.ordersName).replaceAll(",", "  -  "));
 		});
 	},
 };

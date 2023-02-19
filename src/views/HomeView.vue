@@ -146,9 +146,13 @@ export default {
 		},
 	},
 	async mounted() {
-		let data = await axios.get("http://127.0.0.1:8000/meal");
+		let data = await axios.get(
+			"https://api-food-delivery-production.up.railway.app/meal"
+		);
 		this.meals = data.data;
-		axios.get("http://127.0.0.1:8000/category").then((response) => {
+		axios.get(
+			"https://api-food-delivery-production.up.railway.app/category"
+		).then((response) => {
 			this.categories = response.data;
 		});
 		console.log(this.orders);
