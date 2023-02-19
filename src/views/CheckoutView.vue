@@ -40,7 +40,7 @@
 					text="تسليم الطلب"
 					BackgroundColor="var(--main_color)"
 					TextColor="#FFF"
-					width="10rem"
+					width="clamp(10px,300px,100%)"
 					display="flex"
 					margin="auto"
 					@click.prevent="sendOrder"

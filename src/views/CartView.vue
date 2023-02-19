@@ -87,7 +87,7 @@
 					</div>
 				</div>
 				<FormButton
-					width="300px"
+					width="clamp(10px,300px,100%)"
 					center="auto"
 					text="تفيذ الطلب"
 					BackgroundColor="#fe9801"
