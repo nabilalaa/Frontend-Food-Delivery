@@ -122,14 +122,14 @@ export default {
 			if (this.search !== "") {
 				await axios
 					.post(
-						`http://127.0.0.1:8000/meal?search=${this.search}`
+						`https://api-food-delivery-production.up.railway.app/meal?search=${this.search}`
 					)
 					.then((response) => {
 						this.searchMeals = response.data;
 					});
 			} else {
 				let data = await axios.get(
-					"http://127.0.0.1:8000/meal"
+					"https://api-food-delivery-production.up.railway.app/meal"
 				);
 				this.searchMeals = data.data;
 			}
