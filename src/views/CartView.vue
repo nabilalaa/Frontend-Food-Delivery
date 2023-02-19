@@ -13,6 +13,7 @@
 	</div>
 	<div class="cart-section">
 		<div class="cart">
+			{{ this.cart_items }}
 			<table v-if="this.cart_items.length !== 0">
 				<thead>
 					<tr>
@@ -98,9 +99,7 @@
 				/>
 			</table>
 
-			<div class="msg" v-else-if="this.cart_items.length == 0">
-				لايوجد طلبات
-			</div>
+			<div class="msg" v-else>لايوجد طلبات</div>
 		</div>
 	</div>
 </template>
@@ -116,8 +115,6 @@ export default {
 		return {
 			total: 0,
 			cart_items: [],
-			backgroundImage:
-				'url("https://eatsy.bold-themes.com/burger/wp-content/uploads/sites/2/2018/09/featured_image_shop.jpg")',
 		};
 	},
 	methods: {
@@ -148,7 +145,6 @@ export default {
 	},
 	mounted() {
 		let data = JSON.parse(sessionStorage.getItem("data"));
-		console.log(data);
 		this.cart_items = data;
 		try {
 			let list = [];
@@ -161,7 +157,7 @@ export default {
 			}, 0);
 			this.total = sum;
 		} catch (error) {
-			console.log(error);
+			return;
 		}
 	},
 };

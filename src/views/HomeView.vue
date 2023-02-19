@@ -155,13 +155,11 @@ export default {
 		).then((response) => {
 			this.categories = response.data;
 		});
-		console.log(this.orders);
 
 		try {
 			JSON.parse(sessionStorage.getItem("data")).forEach((e) => {
 				this.orders.push(e);
 			});
-			// console.log(sessionStorage.getItem("data"));
 		} catch (error) {
 			return;
 		}
