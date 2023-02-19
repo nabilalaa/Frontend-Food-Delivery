@@ -8,7 +8,6 @@
 				<FormInput label="الاسم بالكامل *" v-model="name" />
 				<FormInput label="العنوان *" v-model="address" />
 				<FormInput label="المحافظة *" v-model="city" />
-				{{ this.phone }}
 				<FormInput label="رقم الموبيل *" v-model="phone" />
 				<FormInput label="الايميل *" v-model="email" />
 				<FormTextarea label="الملاحظات" v-model="notes" />
@@ -74,7 +73,12 @@ export default {
 
 	methods: {
 		async sendOrder() {
-			if (this.name && this.address && this.phone && this.email) {
+			if (
+				this.name &&
+				this.address &&
+				this.phone.length == 12 &&
+				this.email
+			) {
 				try {
 					await axios
 						.post(
@@ -102,13 +106,17 @@ export default {
 						.catch((error) => {
 							if (error.response.data.email) {
 								alert("ادخل ايميل صالح");
+							} else if (
+								error.response.status == 500
+							) {
+								alert("ادخل رقم موبيل صالح");
 							}
 						});
 				} catch (error) {
 					console.log(error);
 				}
 			} else {
-				alert("املأ الحقول");
+				alert("تأكد من صحة البيانات");
 			}
 		},
 	},
