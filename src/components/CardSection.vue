@@ -19,26 +19,27 @@
 				<div class="minus" @click="minus">-</div>
 			</div>
 		</div>
-		<FormButton
-			:text="buttonText"
-			BackgroundColor="#CCDA46"
-			TextColor="#FFF"
-			to=""
-			@click.prevent="sendOrder"
-			width="12rem"
-			display="inline-flex"
-			margin="10px"
-		/>
-		<FormButton
-			v-html="icon"
-			BackgroundColor="#CCDA46"
-			TextColor="#FFF"
-			to=""
-			width="2.5rem"
-			@click.prevent="details"
-			display="inline-flex"
-			margin="10px auto"
-		/>
+		<div class="flex" style="margin: 0; justify-content: space-evenly">
+			<FormButton
+				:text="buttonText"
+				BackgroundColor="#CCDA46"
+				TextColor="#FFF"
+				to=""
+				@click.prevent="sendOrder"
+				width="12rem"
+				display="flex"
+			/>
+			<FormButton
+				v-html="icon"
+				BackgroundColor="#CCDA46"
+				TextColor="#FFF"
+				to=""
+				width="2.5rem"
+				@click.prevent="details"
+				display="flex"
+				margin="0 10px 0 0 "
+			/>
+		</div>
 	</div>
 </template>
 
@@ -132,6 +133,7 @@ p {
 	align-items: center;
 	flex-wrap: wrap;
 	margin-bottom: 20px;
+	gap: 10px;
 }
 .quantity {
 	width: 132px;
@@ -182,20 +184,5 @@ input[type="number"] {
 	align-items: center;
 	justify-content: center;
 	font-size: 30px;
-}
-a {
-	margin-right: 10px;
-}
-
-@media (max-width: 576px) {
-}
-@media (min-width: 577px) and (max-width: 768px) {
-}
-@media (min-width: 769px) and (max-width: 992px) {
-}
-
-@media (min-width: 993px) and (max-width: 1199px) {
-}
-@media screen {
 }
 </style>

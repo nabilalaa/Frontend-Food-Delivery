@@ -78,4 +78,14 @@ h2 {
 p {
 	padding: 20px;
 }
+@media (max-width: 576px) {
+	.model {
+		width: 100%;
+		margin: 20px;
+	}
+	.image {
+		width: auto;
+		height: auto;
+	}
+}
 </style>
