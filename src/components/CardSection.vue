@@ -88,7 +88,6 @@ export default {
 
 			this.$emit("order", order);
 			this.buttonText = '<span class="icon-shopping-cart"></span>';
-			console.log(document.querySelector(".flex a"));
 			document.querySelector(".flex a").style.pointerEvents =
 				"none";
 		},
