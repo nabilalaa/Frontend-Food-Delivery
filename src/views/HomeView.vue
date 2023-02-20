@@ -175,7 +175,7 @@ export default {
 		},
 		onScroll() {
 			const endOfPage =
-				window.innerHeight + window.pageYOffset >=
+				window.innerHeight + window.scrollY >=
 				document.body.offsetHeight;
 
 			if (endOfPage && this.count > this.meals.length) {
