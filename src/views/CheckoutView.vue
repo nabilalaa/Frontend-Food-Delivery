@@ -65,7 +65,7 @@ export default {
 			name: "adasd",
 			address: "asdasd",
 			city: "asd",
-			phone: "sd",
+			phone: "111111111111",
 			email: "nabilalaa06@gmail.com",
 			notes: "",
 		};

@@ -79,7 +79,7 @@ export default {
 	},
 	data() {
 		return {
-			meals: null,
+			meals: [],
 			photo: null,
 			search: "",
 			searchMeals: [],
@@ -87,6 +87,8 @@ export default {
 			orders: [],
 			showmodel: false,
 			detailsMeal: "",
+			currentPage: 1,
+			count: 0,
 		};
 	},
 	methods: {
@@ -135,7 +137,6 @@ export default {
 			this.orders.push(value);
 
 			sessionStorage.setItem("data", JSON.stringify(this.orders));
-            
 		},
 		details(value) {
 			this.showmodel = !this.showmodel;
@@ -143,17 +144,51 @@ export default {
 
 			this.detailsMeal = value;
 		},
+		getMeal() {
+			axios.get(
+				`https://api-food-delivery-production.up.railway.app/meal?page=${this.currentPage}`
+			)
+				.then((data) => {
+					this.count = data.data.count;
+					for (
+						let i = 0;
+						i < data.data.results.length;
+						i++
+					) {
+						this.meals.push(data.data.results[i]);
+					}
+				})
+				.catch((error) => {
+					if (
+						error.response.data.detail == "Invalid page"
+					) {
+						return;
+					}
+				});
+		},
+		getCategory() {
+			axios.get(
+				"https://api-food-delivery-production.up.railway.app/category"
+			).then((response) => {
+				this.categories = response.data;
+			});
+		},
+		onScroll() {
+			const endOfPage =
+				window.innerHeight + window.pageYOffset >=
+				document.body.offsetHeight;
+
+			if (endOfPage && this.count > this.meals.length) {
+				this.currentPage += 1;
+				this.getMeal();
+			}
+		},
 	},
-	async mounted() {
-		let data = await axios.get(
-			"https://api-food-delivery-production.up.railway.app/meal"
-		);
-		this.meals = data.data;
-		axios.get(
-			"https://api-food-delivery-production.up.railway.app/category"
-		).then((response) => {
-			this.categories = response.data;
-		});
+	mounted() {
+		this.getMeal();
+		this.getCategory();
+
+		window.addEventListener("scroll", this.onScroll);
 
 		try {
 			JSON.parse(sessionStorage.getItem("data")).forEach((e) => {
