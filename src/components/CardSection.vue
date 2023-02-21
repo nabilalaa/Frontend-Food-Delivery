@@ -20,15 +20,16 @@
 			</div>
 		</div>
 		<div class="flex" style="margin: 0; justify-content: center">
-			<FormButton
+			<form-button
 				BackgroundColor="#CCDA46"
 				TextColor="#FFF"
 				to=""
 				@click.prevent="sendOrder"
 				width="12rem"
 				display="flex"
-			/>
-			<FormButton
+				>{{ buttonText }}</form-button
+			>
+			<form-button
 				BackgroundColor="#CCDA46"
 				TextColor="#FFF"
 				to=""
@@ -36,7 +37,9 @@
 				@click.prevent="details"
 				display="flex"
 				margin="0 10px 0 0 "
-			/>
+			>
+				<span v-html="icon"></span>
+			</form-button>
 		</div>
 	</div>
 </template>

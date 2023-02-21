@@ -9,7 +9,7 @@
 			display: display,
 		}"
 	>
-		{{ text }}
+		<slot></slot>
 	</router-link>
 </template>
 
@@ -17,7 +17,6 @@
 export default {
 	name: "FormButon",
 	props: [
-		"text",
 		"BackgroundColor",
 		"TextColor",
 		"BackgroundColorHover",
