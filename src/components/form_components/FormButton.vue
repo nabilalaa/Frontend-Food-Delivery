@@ -39,4 +39,5 @@ a {
 	align-items: center;
 	font-family: "Vazirmatn", sans-serif;
 }
+
 </style>

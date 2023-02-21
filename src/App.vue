@@ -5,6 +5,9 @@
 export default {};
 </script>
 <style>
+html {
+	height: -webkit-fill-available;
+}
 * {
 	padding: 0;
 	margin: 0;
@@ -37,6 +40,7 @@ body {
 	font-family: "Vazirmatn", sans-serif;
 	direction: rtl;
 	-webkit-user-drag: none;
+	height: -webkit-fill-available;
 }
 
 img {
@@ -49,11 +53,13 @@ img {
 	width: 100%;
 	margin: auto;
 	display: flex;
+	height: -webkit-fill-available;
 }
 .container_home {
 	max-width: 1170px;
 	margin: auto;
 	padding: 0 20px;
+	height: -webkit-fill-available;
 }
 input,
 button {

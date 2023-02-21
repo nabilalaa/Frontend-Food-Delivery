@@ -27,8 +27,9 @@
 				@click.prevent="sendOrder"
 				width="12rem"
 				display="flex"
-				>{{ buttonText }}</form-button
 			>
+				<span v-html="buttonText"></span>
+			</form-button>
 			<form-button
 				BackgroundColor="#CCDA46"
 				TextColor="#FFF"
@@ -190,5 +191,11 @@ input[type="number"] {
 	justify-content: center;
 	font-size: 30px;
 	cursor: pointer;
+}
+
+a span {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 </style>
