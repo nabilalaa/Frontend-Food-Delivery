@@ -189,6 +189,7 @@ export default {
 		this.getCategory();
 
 		window.addEventListener("scroll", this.onScroll);
+		window.addEventListener("touchmove", this.onScroll);
 
 		try {
 			JSON.parse(sessionStorage.getItem("data")).forEach((e) => {
