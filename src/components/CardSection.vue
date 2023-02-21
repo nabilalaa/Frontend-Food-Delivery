@@ -21,7 +21,6 @@
 		</div>
 		<div class="flex" style="margin: 0; justify-content: center">
 			<FormButton
-				v-html="buttonText"
 				BackgroundColor="#CCDA46"
 				TextColor="#FFF"
 				to=""
@@ -30,7 +29,6 @@
 				display="flex"
 			/>
 			<FormButton
-				v-html="icon"
 				BackgroundColor="#CCDA46"
 				TextColor="#FFF"
 				to=""
