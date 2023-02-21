@@ -36,6 +36,7 @@ ul {
 body {
 	font-family: "Vazirmatn", sans-serif;
 	direction: rtl;
+	-webkit-user-drag: none;
 }
 
 img {
