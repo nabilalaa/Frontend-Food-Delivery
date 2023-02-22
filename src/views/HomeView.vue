@@ -6,7 +6,7 @@
 		:details="detailsMeal"
 		@click="closeModel"
 	/>
-	<router-link class="cart" to="cart">
+	<router-link class="cart" to="cart" v-if="showCart">
 		<span class="icon-shopping-cart"></span>
 	</router-link>
 	<section class="menu">
@@ -89,6 +89,7 @@ export default {
 			detailsMeal: "",
 			currentPage: 1,
 			count: 0,
+			showCart: false,
 		};
 	},
 	methods: {
@@ -137,6 +138,9 @@ export default {
 			this.orders.push(value);
 
 			sessionStorage.setItem("data", JSON.stringify(this.orders));
+			if (sessionStorage.getItem("data")) {
+				this.showCart = true;
+			}
 		},
 		details(value) {
 			this.showmodel = !this.showmodel;
@@ -175,7 +179,7 @@ export default {
 		},
 		onScroll() {
 			const endOfPage =
-				window.innerHeight + window.scrollY >=
+				window.innerHeight + window.pageYOffset >=
 				document.body.offsetHeight;
 
 			if (endOfPage && this.count > this.meals.length) {
@@ -187,6 +191,10 @@ export default {
 	mounted() {
 		this.getMeal();
 		this.getCategory();
+
+		if (sessionStorage.getItem("data")) {
+			this.showCart = true;
+		}
 
 		window.addEventListener("scroll", this.onScroll);
 		window.addEventListener("touchmove", this.onScroll);

@@ -28,7 +28,10 @@
 				width="12rem"
 				display="flex"
 			>
-				<span v-html="buttonText"></span>
+				<span
+					@click.prevent="sendOrder"
+					v-html="buttonText"
+				></span>
 			</form-button>
 			<form-button
 				BackgroundColor="#CCDA46"
@@ -79,7 +82,7 @@ export default {
 				this.meal_quantity = 1;
 			}
 		},
-		sendOrder() {
+		sendOrder(e) {
 			let order = {
 				name: this.meal_name,
 				image: this.meal_image,
@@ -89,9 +92,10 @@ export default {
 			this.orders.push(order);
 
 			this.$emit("order", order);
+			console.log(e.target.parentElement);
+			e.target.style.pointerEvents = "none";
+			e.target.parentElement.style.pointerEvents = "none";
 			this.buttonText = '<span class="icon-shopping-cart"></span>';
-			document.querySelector(".flex a").style.pointerEvents =
-				"none";
 		},
 		details() {
 			let order = {
