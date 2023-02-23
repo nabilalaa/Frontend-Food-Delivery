@@ -103,9 +103,4 @@ button {
 .icon-shopping-cart:before {
 	content: "\e901";
 }
-@media (max-width: 576px) {
-	html {
-		height: -webkit-fill-available;
-	}
-}
 </style>

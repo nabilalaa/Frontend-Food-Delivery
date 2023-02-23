@@ -88,7 +88,7 @@ export default {
 			showmodel: false,
 			detailsMeal: "",
 			currentPage: 1,
-			count: 0,
+			count: 6,
 			showCart: false,
 		};
 	},
@@ -149,41 +149,26 @@ export default {
 			this.detailsMeal = value;
 		},
 		getMeal() {
-			axios.get(
-				`http://127.0.0.1:8000/meal?page=${this.currentPage}`
-			)
-				.then((data) => {
-					this.count = data.data.count;
-					for (
-						let i = 0;
-						i < data.data.results.length;
-						i++
-					) {
-						this.meals.push(data.data.results[i]);
-					}
-				})
-				.catch((error) => {
-					if (
-						error.response.data.detail == "Invalid page"
-					) {
-						return;
-					}
-				});
-		},
-		getCategory() {
-			axios.get("http://127.0.0.1:8000/category").then(
+			axios.get(`https://api-food-delivery.vercel.app/meal`).then(
 				(response) => {
-					this.categories = response.data;
+					this.meals = response.data.slice(0, this.count);
 				}
 			);
+		},
+		getCategory() {
+			axios.get(
+				"https://api-food-delivery.vercel.app/category"
+			).then((response) => {
+				this.categories = response.data;
+			});
 		},
 		onScroll() {
 			const endOfPage =
 				window.innerHeight + window.pageYOffset >=
 				document.body.offsetHeight;
 
-			if (endOfPage && this.count > this.meals.length) {
-				this.currentPage += 1;
+			if (endOfPage) {
+				this.count += 3;
 				this.getMeal();
 			}
 		},
