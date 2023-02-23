@@ -150,7 +150,7 @@ export default {
 		},
 		getMeal() {
 			axios.get(
-				`https://api-food-delivery-production.up.railway.app/meal?page=${this.currentPage}`
+				`http://127.0.0.1:8000/meal?page=${this.currentPage}`
 			)
 				.then((data) => {
 					this.count = data.data.count;
@@ -171,11 +171,11 @@ export default {
 				});
 		},
 		getCategory() {
-			axios.get(
-				"https://api-food-delivery-production.up.railway.app/category"
-			).then((response) => {
-				this.categories = response.data;
-			});
+			axios.get("http://127.0.0.1:8000/category").then(
+				(response) => {
+					this.categories = response.data;
+				}
+			);
 		},
 		onScroll() {
 			const endOfPage =
