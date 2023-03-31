@@ -145,19 +145,18 @@ export default {
 		details(value) {
 			this.showmodel = !this.showmodel;
 			document.body.style.overflow = "hidden";
-
 			this.detailsMeal = value;
 		},
 		getMeal() {
-			axios.get(`https://api-food-delivery.vercel.app/meal`).then(
-				(response) => {
-					this.meals = response.data.slice(0, this.count);
-				}
-			);
+			axios.get(
+				`https://api-restaurant-h0dh.onrender.com/meal`
+			).then((response) => {
+				this.meals = response.data.slice(0, this.count);
+			});
 		},
 		getCategory() {
 			axios.get(
-				"https://api-food-delivery.vercel.app/category"
+				"https://api-restaurant-h0dh.onrender.com/category"
 			).then((response) => {
 				this.categories = response.data;
 			});

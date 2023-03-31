@@ -28,10 +28,7 @@
 				width="12rem"
 				display="flex"
 			>
-				<span
-					@click.prevent="sendOrder"
-					v-html="buttonText"
-				></span>
+				<span v-html="buttonText"></span>
 			</form-button>
 			<form-button
 				BackgroundColor="#CCDA46"
