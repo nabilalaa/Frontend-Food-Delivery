@@ -1,5 +1,5 @@
 <template>
-	<div class="card">
+	<div class="card flex flex-col">
 		<h2>{{ name }}</h2>
 		<div class="image">
 			<img :src="image" alt="" />
@@ -7,7 +7,7 @@
 		<p>
 			{{ desc }}
 		</p>
-		<div class="flex">
+		<div class="flex items-center w-full">
 			<div class="price">{{ price }}ج.م</div>
 			<div class="quantity">
 				<div class="plus" @click="plus">+</div>
@@ -18,7 +18,7 @@
 				/>
 				<div class="minus" @click="minus">-</div>
 			</div>
-		</div>
+        </div>
 		<div class="flex" style="margin: 0; justify-content: center">
 			<form-button
 				BackgroundColor="#CCDA46"
@@ -28,7 +28,7 @@
 				width="12rem"
 				display="flex"
 			>
-				<span v-html="buttonText"></span>
+				{{ this.buttonText }}
 			</form-button>
 			<form-button
 				BackgroundColor="#CCDA46"
@@ -53,7 +53,9 @@ export default {
 	name: "CardSection",
 	props: ["name", "desc", "image", "price", "quantity"],
 
-	components: { FormButton },
+	components: {
+		FormButton,
+	},
 
 	data() {
 		return {
@@ -79,20 +81,20 @@ export default {
 				this.meal_quantity = 1;
 			}
 		},
-		sendOrder(e) {
+		sendOrder() {
 			let order = {
 				name: this.meal_name,
 				image: this.meal_image,
 				price: this.meal_price,
 				quantity: this.meal_quantity,
 			};
-			this.orders.push(order);
-
-			this.$emit("order", order);
-			console.log(e.target.parentElement);
-			e.target.style.pointerEvents = "none";
-			e.target.parentElement.style.pointerEvents = "none";
-			this.buttonText = '<span class="icon-shopping-cart"></span>';
+			// this.orders.push(order);
+			this.$store.commit("AddOrder", order);
+			// sessionStorage.setItem(
+			// 	"cart",
+			// 	this.$store.dispatch("AddOrder", order)
+			// );
+			this.$emit("order");
 		},
 		details() {
 			let order = {
@@ -102,7 +104,11 @@ export default {
 				quantity: this.meal_quantity,
 				desc: this.meal_desc,
 			};
+			console.log(order);
 			this.$emit("details", order);
+			this.showmodel = !this.showmodel;
+			document.body.style.overflow = "hidden";
+			this.detailsMeal = order;
 		},
 	},
 };
@@ -136,7 +142,6 @@ p {
 .flex {
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
 	flex-wrap: wrap;
 	margin-bottom: 20px;
 	gap: 10px;
@@ -158,10 +163,6 @@ input::-webkit-inner-spin-button {
 	margin: 0;
 }
 
-/* Firefox */
-input[type="number"] {
-	-moz-appearance: textfield;
-}
 .plus {
 	width: calc(100% / 3);
 	height: 40px;

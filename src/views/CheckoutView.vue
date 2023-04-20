@@ -126,7 +126,7 @@ export default {
 		FormTextarea,
 	},
 	mounted() {
-		let data = JSON.parse(sessionStorage.getItem("data"));
+		let data = JSON.parse(sessionStorage.getItem("cart"));
 		this.orders = data;
 		data.forEach((e) => {
 			this.ordersName.push(e.name);

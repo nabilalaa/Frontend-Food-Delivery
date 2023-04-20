@@ -96,23 +96,24 @@ export default {
 	data() {
 		return {
 			total: 0,
-			cart_items: [],
 		};
 	},
 	methods: {
 		deleteItem(e) {
-			this.cart_items.splice(e, 1);
-
-			sessionStorage.setItem(
-				"data",
-				JSON.stringify(this.cart_items)
-			);
+			this.$store.commit("deleteItem", e);
 			this.$router.go(0);
 		},
 	},
+	computed: {
+		cart_items() {
+			return this.$store.state.cart;
+		},
+	},
 	mounted() {
-		let data = JSON.parse(sessionStorage.getItem("data"));
-		this.cart_items = data;
+		this.$store.getters.subtotal;
+		let data = JSON.parse(sessionStorage.getItem("cart"));
+		// console.log(data);
+		// this.cart_items = JSON.parse(data);
 		try {
 			let list = [];
 
@@ -147,11 +148,13 @@ export default {
 	border-radius: 10px;
 	color: #fff;
 	font-size: 20px;
+	font-family: "Vazirmatn", sans-serif;
 }
 .cart-section {
 	background-color: #f4eec7;
 	padding: 120px 0;
 	min-height: 100vh;
+	font-family: "Vazirmatn", sans-serif;
 }
 .cart {
 	background-color: #fff;

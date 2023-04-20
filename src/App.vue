@@ -5,12 +5,6 @@
 export default {};
 </script>
 <style>
-* {
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
-	font-family: "Vazirmatn", sans-serif;
-}
 :root {
 	--main_color: #fe9801;
 	--secondary_color: #f4eec7;
@@ -20,9 +14,9 @@ h2,
 h3,
 h4,
 p {
-	text-overflow: ellipsis;
+	/* text-overflow: ellipsis;
 	white-space: nowrap;
-	overflow: hidden;
+	overflow: hidden; */
 }
 
 a {
@@ -46,11 +40,6 @@ img {
 	object-fit: cover;
 }
 
-.container {
-	width: 100%;
-	margin: auto;
-	display: flex;
-}
 .container_home {
 	max-width: 1170px;
 	margin: auto;

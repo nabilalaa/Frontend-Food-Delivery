@@ -6,7 +6,7 @@
 					<h4 :style="{ color: tcolor }">معاينة الطلب</h4>
 					<div
 						class="close"
-						@click="closeModel"
+						@click="$emit('closeModel')"
 						:style="{ color: tcolor }"
 					>
 						<span class="icon-x"></span>
