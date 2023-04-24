@@ -8,6 +8,7 @@ export default createStore({
 		orders: [],
 		meals: [],
 		count: 6,
+		categories: [],
 	},
 	getters: {
 		subtotal(state) {
@@ -36,6 +37,13 @@ export default createStore({
 				`https://api-restaurant-h0dh.onrender.com/meal`
 			).then((response) => {
 				this.state.meals = response.data.slice(0, count);
+			});
+		},
+		categories() {
+			axios.get(
+				`https://api-restaurant-h0dh.onrender.com/category`
+			).then((response) => {
+				this.state.categories = response.data;
 			});
 		},
 	},

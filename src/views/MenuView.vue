@@ -33,6 +33,7 @@
 						{{ category.nameArabic }}
 					</option>
 				</select>
+				<DropMenu />
 			</div>
 			<div class="menu_items" v-if="this.searchMeals.length == 0">
 				<CardSection
@@ -52,7 +53,7 @@
 				<CardSection
 					v-for="meal in searchMeals"
 					:key="meal"
-					:id="meal.category"
+					:id="meal.categoryArabic"
 					:name="meal.name"
 					:desc="meal.desc"
 					:image="meal.image"
@@ -62,7 +63,6 @@
 					@details="details"
 				/>
 			</div>
-			{{ this.$store.state.orders.length }}
 		</div>
 	</section>
 </template>
@@ -71,12 +71,14 @@
 import axios from "axios";
 import CardSection from "@/components/CardSection.vue";
 import ModelBox from "@/components/ModelBox.vue";
+import DropMenu from "@/components/DropdownMenu.vue";
 
 export default {
 	name: "HomeView",
 	components: {
 		CardSection,
 		ModelBox,
+		DropMenu,
 	},
 	data() {
 		return {

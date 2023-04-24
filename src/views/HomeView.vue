@@ -6,6 +6,9 @@
 		v-if="showmodel"
 		@close-model="closeModel"
 	/>
+	<router-link class="cart" to="cart" v-if="showCart">
+		<span class="icon-shopping-cart"></span>
+	</router-link>
 	<nav class="p-8 bg-secondColor">
 		<ul class="flex justify-evenly flex-row-reverse capitalize text-xl">
 			<li>
@@ -277,6 +280,7 @@ export default {
 			meals: [],
 			detailsMeal: {},
 			showmodel: false,
+			showCart: false,
 		};
 	},
 	components: {
@@ -304,18 +308,21 @@ export default {
 			this.orders.push(value);
 
 			// sessionStorage.setItem("data", JSON.stringify(this.orders));
-			if (sessionStorage.getItem("data")) {
+			if (sessionStorage.getItem("cart").length > 0) {
 				this.showCart = true;
 			}
 		},
 	},
 	mounted() {
 		this.getMeal();
+		if (sessionStorage.getItem("cart")) {
+			this.showCart = true;
+		}
 	},
 };
 </script>
 
-<style>
+<style scoped>
 nav {
 	font-family: "Racing Sans One", cursive;
 }
@@ -324,5 +331,19 @@ nav {
 .contact,
 footer {
 	direction: ltr;
+}
+.cart {
+	width: 50px;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--main_color);
+	position: fixed;
+	top: 50%;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	border-radius: 10px;
+	color: #fff;
+	font-size: 20px;
 }
 </style>
