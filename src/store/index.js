@@ -9,12 +9,18 @@ export default createStore({
 		meals: [],
 		count: 6,
 		categories: [],
+		category: [],
 	},
 	getters: {
 		subtotal(state) {
 			state.cart.forEach((cart) => {
 				console.log(cart.quantity * cart.price);
 			});
+		},
+		filter(state) {
+			return state.meals.filter(
+				(category) => category.category == state.category
+			);
 		},
 	},
 	mutations: {
@@ -32,11 +38,11 @@ export default createStore({
 		},
 	},
 	actions: {
-		Meals(context, count) {
+		Meals() {
 			axios.get(
-				`https://api-restaurant-h0dh.onrender.com/meal`
+				`https://api-restaurant-h0dh.onrender.com/meal?limit=${this.state.count}`
 			).then((response) => {
-				this.state.meals = response.data.slice(0, count);
+				this.state.meals = response.data.results;
 			});
 		},
 		categories() {

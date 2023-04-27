@@ -4,7 +4,9 @@
 			class="flex justify-between items-center bg-white p-4 cursor-pointer"
 			@click="menu = !menu"
 		>
-			<h3 class="">الاصناف</h3>
+			<h3 class="">
+				{{ categoryName ? categoryName : "الاصناف" }}
+			</h3>
 			<div
 				class="border-l-8 border-r-8 border-t-8 border-t-thirdColor border-r-transparent border-l-transparent"
 			></div>
@@ -33,12 +35,14 @@ export default {
 	data() {
 		return {
 			menu: false,
+			categoryName: "",
 		};
 	},
 	methods: {
 		choose(e) {
 			this.menu = false;
-			console.log(e.target.value);
+			this.$store.state.category = e.target.innerText;
+			this.categoryName = e.target.innerText;
 			if (e.target.innerText === "الكل") {
 				console.log("ss");
 				document.querySelectorAll(".card").forEach((ele) => {

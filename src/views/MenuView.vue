@@ -22,22 +22,11 @@
 						<span class="icon-search"></span>
 					</button>
 				</form>
-				<select name="category" id="" @change="choose">
-					<option value="" selected disabled>اصناف</option>
-					<option value="#All">الكل</option>
-					<option
-						v-for="category in categories"
-						:key="category"
-						:value="category.nameEnglish"
-					>
-						{{ category.nameArabic }}
-					</option>
-				</select>
 				<DropMenu />
 			</div>
-			<div class="menu_items" v-if="this.searchMeals.length == 0">
+			<div class="menu_items" v-if="filterMeal.length > 0">
 				<CardSection
-					v-for="meal in Meals"
+					v-for="meal in filterMeal"
 					:key="meal"
 					:id="meal.category"
 					:name="meal.name"
@@ -51,7 +40,7 @@
 			</div>
 			<div class="menu_items" v-else>
 				<CardSection
-					v-for="meal in searchMeals"
+					v-for="meal in Meals"
 					:key="meal"
 					:id="meal.categoryArabic"
 					:name="meal.name"
@@ -83,7 +72,6 @@ export default {
 	data() {
 		return {
 			categories: [],
-			meals: this.$store.state.meals,
 			photo: null,
 			search: "",
 			searchMeals: [],
@@ -157,7 +145,7 @@ export default {
 			if (endOfPage) {
 				this.$store.dispatch(
 					"Meals",
-					this.$store.state.count + 3
+					(this.$store.state.count += 3)
 				);
 			}
 		},
@@ -178,6 +166,9 @@ export default {
 	computed: {
 		Meals() {
 			return this.$store.state.meals;
+		},
+		filterMeal() {
+			return this.$store.getters.filter;
 		},
 	},
 };
