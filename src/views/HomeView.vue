@@ -1,14 +1,5 @@
 <template>
-	<ModelBox
-		bg="#FE9801"
-		tcolor="#FFF"
-		:details="detailsMeal"
-		v-if="showmodel"
-		@close-model="closeModel"
-	/>
-	<router-link class="cart" to="cart" v-if="showCart">
-		<span class="icon-shopping-cart"></span>
-	</router-link>
+	
 	<nav class="p-8 bg-secondColor">
 		<ul class="flex justify-evenly flex-row-reverse capitalize text-xl">
 			<li>
@@ -53,25 +44,28 @@
 			</div>
 		</div>
 	</header>
-	<div class="dishes py-32">
+	<div class="category py-32">
 		<div class="container">
 			<h1
 				class="text-center font-FamilyHeader text-mainColor mb-12"
 			>
 				Our Awesome Services
 			</h1>
+
 			<div
 				class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4"
 			>
-				<CardSection
-					v-for="meal in meals"
-					:key="meal"
-					:name="meal.name"
-					:image="meal.image"
-					:price="meal.price"
-					@details="details"
-					@order="add_order"
+				<CategoryCard
+					image="https://www.supermama.me/system/App/Models/Article/images/000/104/934/watermarked/%D8%A3%D9%81%D8%B6%D9%84-%D9%85%D8%B7%D8%A7%D8%B9%D9%85-%D9%84%D9%84%D9%85%D8%B4%D9%88%D9%8A%D8%A7%D8%AA-%D9%81%D9%8A-%D8%A7%D9%84%D9%82%D8%A7%D9%87%D8%B1%D8%A9.jpg"
+					categoryName="وجبات"
 				/>
+				<CategoryCard
+					image="../assets/images/meals.jpg"
+					categoryName="وجبات"
+				/>
+				<CategoryCard categoryName="بروست" />
+				<CategoryCard />
+				<CategoryCard />
 			</div>
 		</div>
 	</div>
@@ -268,8 +262,8 @@
 </template>
 
 <script>
-import CardSection from "@/components/CardSection.vue";
-import ModelBox from "@/components/ModelBox.vue";
+// Initialization for ES Users
+import CategoryCard from "@/components/CategoryCard.vue";
 
 import axios from "axios";
 
@@ -284,14 +278,10 @@ export default {
 		};
 	},
 	components: {
-		CardSection,
-		ModelBox,
+		CategoryCard,
 	},
 	methods: {
-		closeModel() {
-			this.showmodel = false;
-			document.body.style.overflow = "auto";
-		},
+		
 		getMeal() {
 			axios.get(
 				`https://api-restaurant-h0dh.onrender.com/meal`
@@ -314,10 +304,10 @@ export default {
 		},
 	},
 	mounted() {
+		sessionStorage.setItem("cart", "[]");
+
 		this.getMeal();
-		if (sessionStorage.getItem("cart")) {
-			this.showCart = true;
-		}
+		
 	},
 };
 </script>

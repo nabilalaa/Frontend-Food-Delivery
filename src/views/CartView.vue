@@ -11,9 +11,10 @@
 			</li>
 		</ul>
 	</div>
+
 	<div class="cart-section">
 		<div class="cart">
-			<table v-if="this.cart_items.length !== 0">
+			<table v-if="this.cart_items.length > 0">
 				<thead>
 					<tr>
 						<th></th>
@@ -30,18 +31,42 @@
 					>
 						<td>
 							<div class="image">
-								<img :src="i.image" alt="" />
+								<img
+									:src="
+										i.attributes.image
+											.data
+											.attributes
+											.url
+									"
+									alt=""
+								/>
 							</div>
 						</td>
 
 						<td>
-							{{ i.name }}
+							{{ i.attributes.name }}
 						</td>
 
-						<td>{{ i.price }}ج.م</td>
-						<td>{{ i.quantity }}</td>
+						<td>{{ i.attributes.price }}ج.م</td>
+						<td>
+							<input
+								class="border-2 outline-none p-4 rounded-full w-28 transition focus:border-mainColor"
+								type="number"
+								min="1"
+								v-model="i.attributes.quantity"
+								@change="
+									updateTotal(
+										i.attributes
+											.quantity
+									)
+								"
+							/>
+						</td>
 						<td class="subtotal">
-							{{ i.quantity * i.price }}
+							{{
+								i.attributes.quantity *
+								i.attributes.price
+							}}
 						</td>
 						<div
 							class="remove"
@@ -96,12 +121,27 @@ export default {
 	data() {
 		return {
 			total: 0,
+			quantity: null,
 		};
 	},
 	methods: {
 		deleteItem(e) {
 			this.$store.commit("deleteItem", e);
 			this.$router.go(0);
+		},
+		updateTotal() {
+			// console.log(quantity);
+			// let data = JSON.parse(localStorage.getItem("cart"));
+			let list = [];
+
+			document.querySelectorAll(".subtotal").forEach((e) => {
+				list.push(Number(e.innerText));
+			});
+			console.log(list);
+			var sum = list.reduce(function (a, b) {
+				return a + b;
+			}, 0);
+			this.total = sum;
 		},
 	},
 	computed: {
@@ -110,23 +150,16 @@ export default {
 		},
 	},
 	mounted() {
-		this.$store.getters.subtotal;
-		let data = JSON.parse(sessionStorage.getItem("cart"));
-		// console.log(data);
-		// this.cart_items = JSON.parse(data);
-		try {
-			let list = [];
+		let list = [];
 
-			data.forEach((e) => {
-				list.push(Number(e.price * e.quantity));
-			});
-			var sum = list.reduce(function (a, b) {
-				return a + b;
-			}, 0);
-			this.total = sum;
-		} catch (error) {
-			return;
-		}
+		document.querySelectorAll(".subtotal").forEach((e) => {
+			list.push(Number(e.innerText));
+		});
+		console.log(list);
+		var sum = list.reduce(function (a, b) {
+			return a + b;
+		}, 0);
+		this.total = sum;
 	},
 };
 </script>

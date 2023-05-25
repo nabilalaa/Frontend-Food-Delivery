@@ -1,6 +1,11 @@
 module.exports = {
 	mode: "jit",
-	purge: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+	content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+	// content: [
+	// 	"./index.html",
+	// 	"./src/**/*.{vue,js,ts,jsx,tsx}",
+	// 	"./node_modules/tw-elements/dist/js/**/*.js",
+	// ],
 	theme: {
 		container: {
 			center: true,
@@ -20,5 +25,5 @@ module.exports = {
 	variants: {
 		extend: {},
 	},
-	plugins: [],
+	plugins: [require("tw-elements/dist/plugin.cjs")],
 };

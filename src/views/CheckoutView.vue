@@ -101,6 +101,7 @@ export default {
 							if (response.status > 200) {
 								alert("تم التسليم بنجاح");
 								this.$router.push("/");
+								localStorage.clear();
 							}
 						})
 						.catch((error) => {

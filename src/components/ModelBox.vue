@@ -14,11 +14,31 @@
 				</div>
 			</div>
 			<div class="model-content">
-				<div class="image">
-					<img :src="details.image" alt="" />
+				<div
+					class="image"
+					v-if="
+						details.attributes.image.data.attributes
+							.url !== null
+					"
+				>
+					<img
+						:src="
+							details.attributes.image.data
+								.attributes.url
+						"
+						:alt="details.attributes.name"
+					/>
 				</div>
-				<h2>{{ details.name }}</h2>
-				<p :style="{ color: tcolor }">{{ details.desc }}</p>
+				<div class="image" v-else>
+					<img
+						:src="details"
+						:alt="details.attributes.name"
+					/>
+				</div>
+				<h2>{{ details.attributes.name }}</h2>
+				<p :style="{ color: tcolor }">
+					{{ details.attributes.desc }}
+				</p>
 			</div>
 		</div>
 	</div>

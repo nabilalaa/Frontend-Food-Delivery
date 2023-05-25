@@ -24,6 +24,7 @@
 				</form>
 				<DropMenu />
 			</div>
+
 			<div class="menu_items" v-if="filterMeal.length > 0">
 				<CardSection
 					v-for="meal in filterMeal"
@@ -103,22 +104,22 @@ export default {
 					});
 			}
 		},
-		async searchMeal() {
-			if (this.search !== "") {
-				await axios
-					.post(
-						`https://api-food-delivery-production.up.railway.app/meal?search=${this.search}`
-					)
-					.then((response) => {
-						this.searchMeals = response.data;
-					});
-			} else {
-				let data = await axios.get(
-					"https://api-food-delivery-production.up.railway.app/meal"
-				);
-				this.searchMeals = data.data;
-			}
-		},
+		// async searchMeal() {
+		// 	if (this.search !== "") {
+		// 		await axios
+		// 			.post(
+		// 				`https://api-food-delivery-production.up.railway.app/meal?search=${this.search}`
+		// 			)
+		// 			.then((response) => {
+		// 				this.searchMeals = response.data;
+		// 			});
+		// 	} else {
+		// 		let data = await axios.get(
+		// 			"https://api-food-delivery-production.up.railway.app/meal"
+		// 		);
+		// 		this.searchMeals = data.data;
+		// 	}
+		// },
 		add_order() {
 			if (sessionStorage.getItem("cart").length > 0) {
 				this.showCart = true;
@@ -154,7 +155,9 @@ export default {
 		this.getCategory();
 		this.$store.dispatch("Meals", this.$store.state.count);
 
-		if (sessionStorage.getItem("data")) {
+		if (sessionStorage.getItem("cart") == "[]") {
+			this.showCart = false;
+		} else {
 			this.showCart = true;
 		}
 
