@@ -2,6 +2,12 @@
 	<router-link class="home" to="/">
 		<span class="icon-home"></span>
 	</router-link>
+	<router-link
+		class="z-50 text-xl w-[50px] h-[50px] flex justify-center items-center bg-mainColor fixed top-[30%] text-white shadow-[0_5px_15px_rgba(0,0,0,0.35)] rounded-xl"
+		to="AddOrder"
+	>
+		<span class="icon-shopping-cart"></span>
+	</router-link>
 	<div class="nav-mobile">
 		<ul class="links-mobile">
 			<li class="main-link">
@@ -79,17 +85,23 @@
 				<div class="total">
 					<h3>ملخص الدفع</h3>
 
-					<div class="flex">
+					<div
+						class="flex justify-between items-center mb-8"
+					>
 						<h4>المجموع</h4>
 						<div>
 							{{ total }}
 						</div>
 					</div>
-					<div class="flex">
+					<div
+						class="flex justify-between items-center mb-8"
+					>
 						<h4>رسوم التوصيل</h4>
 						<div class="value"></div>
 					</div>
-					<div class="flex">
+					<div
+						class="flex justify-between items-center mb-8"
+					>
 						<h4>قيمة الطلب</h4>
 						<div class="value"></div>
 					</div>
@@ -127,7 +139,10 @@ export default {
 	methods: {
 		deleteItem(e) {
 			this.$store.commit("deleteItem", e);
-			this.$router.go(0);
+			this.updateTotal();
+			console.log("d");
+			location.reload();
+			// this.$router.currentRoute;
 		},
 		updateTotal() {
 			// console.log(quantity);
@@ -155,7 +170,6 @@ export default {
 		document.querySelectorAll(".subtotal").forEach((e) => {
 			list.push(Number(e.innerText));
 		});
-		console.log(list);
 		var sum = list.reduce(function (a, b) {
 			return a + b;
 		}, 0);
@@ -296,12 +310,6 @@ h3 {
 	margin-bottom: 30px;
 	padding: 20px 0;
 	border-bottom: 1px solid #00000012;
-}
-.flex {
-	margin-bottom: 30px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 }
 
 .msg {

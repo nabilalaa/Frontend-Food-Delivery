@@ -30,6 +30,7 @@ export default createStore({
 	mutations: {
 		AddOrder(state, payload) {
 			state.cart.push(payload);
+
 			this.commit("saveData");
 		},
 		saveData(state) {
@@ -38,11 +39,11 @@ export default createStore({
 		deleteItem(state, e) {
 			state.cart.splice(e, 1);
 			localStorage.setItem("cart", JSON.stringify(state.cart));
-			state.cart.push(JSON.parse(state.cart));
 		},
-		// MEALS(state, ) {
-		//     state.meals =
-		// }
+		// checkoutItems(state, payload) {
+		// 	state.checkoutItems.push(payload);
+		// 	console.log(state.checkoutItems);
+		// },
 	},
 	actions: {
 		Meals() {

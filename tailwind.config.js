@@ -6,6 +6,7 @@ module.exports = {
 	// 	"./src/**/*.{vue,js,ts,jsx,tsx}",
 	// 	"./node_modules/tw-elements/dist/js/**/*.js",
 	// ],
+
 	theme: {
 		container: {
 			center: true,
@@ -25,5 +26,4 @@ module.exports = {
 	variants: {
 		extend: {},
 	},
-	plugins: [require("tw-elements/dist/plugin.cjs")],
 };

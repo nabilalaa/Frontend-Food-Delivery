@@ -20,16 +20,22 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="order in orders" :key="order">
+						<tr
+							v-for="order in checkoutItems"
+							:key="order"
+						>
 							<td>
-								{{ order.name }}
+								{{ order.attributes.name }}
 
-								{{ " ×" + order.quantity }}
+								{{
+									" ×" +
+									order.attributes.quantity
+								}}
 							</td>
 							<td>
 								{{
-									order.price *
-									order.quantity
+									order.attributes.price *
+									order.attributes.quantity
 								}}
 							</td>
 						</tr>
@@ -132,6 +138,11 @@ export default {
 		data.forEach((e) => {
 			this.ordersName.push(e.name);
 		});
+	},
+	computed: {
+		checkoutItems() {
+			return this.$store.state.cart;
+		},
 	},
 };
 </script>

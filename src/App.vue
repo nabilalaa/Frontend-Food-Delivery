@@ -9,15 +9,6 @@ export default {};
 	--main_color: #fe9801;
 	--secondary_color: #f4eec7;
 }
-h1,
-h2,
-h3,
-h4,
-p {
-	/* text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden; */
-}
 
 a {
 	text-decoration: none;

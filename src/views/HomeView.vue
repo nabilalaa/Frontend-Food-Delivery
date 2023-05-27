@@ -1,5 +1,11 @@
 <template>
-	
+	<router-link
+		class="cart z-50 text-xl w-[50px] h-[50px] flex justify-center items-center bg-mainColor fixed top-1/2 text-white shadow-[0_5px_15px_rgba(0,0,0,0.35)] rounded-xl"
+		to="cart"
+		v-show="showCart"
+	>
+		<span class="icon-shopping-cart"></span>
+	</router-link>
 	<nav class="p-8 bg-secondColor">
 		<ul class="flex justify-evenly flex-row-reverse capitalize text-xl">
 			<li>
@@ -281,7 +287,6 @@ export default {
 		CategoryCard,
 	},
 	methods: {
-		
 		getMeal() {
 			axios.get(
 				`https://api-restaurant-h0dh.onrender.com/meal`
@@ -304,10 +309,13 @@ export default {
 		},
 	},
 	mounted() {
-		sessionStorage.setItem("cart", "[]");
+		if (localStorage.getItem("cart") == "[]") {
+			this.showCart = false;
+		} else {
+			this.showCart = true;
+		}
 
 		this.getMeal();
-		
 	},
 };
 </script>

@@ -36,7 +36,7 @@
 				class="items w-full rounded-md border overflow-y-scroll h-96"
 			>
 				<div
-					class="item flex p-4 justify-between items-center border-b last-of-type:border-0"
+					class="item flex p-4 justify-between items-center border-b last-of-type:border-0 md:flex-row flex-col"
 					v-for="item in resultsMeal"
 					:key="item.id"
 				>
@@ -66,7 +66,7 @@
 				class="items w-full rounded-md border overflow-y-scroll h-96"
 			>
 				<div
-					class="item flex p-4 justify-between items-center border-b last-of-type:border-0"
+					class="item flex p-4 justify-between items-center border-b last-of-type:border-0 sm:flex-row flex-col"
 					v-for="item in Meals"
 					:key="item.id"
 				>
@@ -76,7 +76,7 @@
 						</div>
 						<div>{{ item.attributes.price }} ج.م</div>
 					</div>
-					<div class="flex">
+					<div class="flex mt-3 sm:m-0">
 						<button
 							@click.prevent="addOrder(item.id)"
 							class="text-white bg-mainColor px-6 py-4 rounded-lg hover:bg-thirdColor transition"
@@ -162,7 +162,6 @@ export default {
 	},
 	mounted() {
 		this.$store.dispatch("Meals");
-		// console.log(this.$store.state.cart);
 		if (localStorage.getItem("cart") == "[]") {
 			this.showCart = false;
 		} else {

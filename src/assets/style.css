@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .input-style {
-	@apply border-[#e9e9e9] border px-4 h-14 rounded-xl focus:border-mainColor transition-colors duration-700 outline-none md:w-4/12 w-full;
+	/* @apply border-[#e9e9e9] border px-4 h-14 rounded-xl focus:border-mainColor transition-colors duration-700 outline-none md:w-4/12 w-full; */
 }
